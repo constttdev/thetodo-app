@@ -1,6 +1,5 @@
 // src/hooks.server.js
 import PocketBase from 'pocketbase';
-import { Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 import { POCKETBASE_URL } from '$env/static/private';
 import { AVATAR_URL } from '$env/static/private';
@@ -14,7 +13,7 @@ export async function pocketbase({ event, resolve }) {
 
 	try {
 		// get an up-to-date auth store state by verifying and refreshing the loaded auth model (if any)
-		event.locals.pb.authStore.isValid && (await event.locals.pb.collection('users').authRefresh());
+		event.locals.pb.authStore.isValid && (await event.locals.pb.collection('user').authRefresh());
 		event.locals.user = structuredClone(event.locals.pb.authStore.model);
 	} catch (_) {
 		// clear the auth store on failed refresh
@@ -29,4 +28,13 @@ export async function pocketbase({ event, resolve }) {
 	return response;
 }
 
-export const handle = sequence(pocketbase);
+const darkMode = async ({ event, resolve }) => {
+	const darkModeCookie = event.cookies.get('darkmode') === 'true';
+	const response = await resolve(event, {
+		transformPageChunk: ({ html }) => html.replace('%darkmode%', darkModeCookie ? 'dark' : '')
+	});
+
+	return response;
+};
+
+export const handle = sequence(pocketbase, darkMode);
