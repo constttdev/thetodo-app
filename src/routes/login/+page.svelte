@@ -20,9 +20,9 @@
             </div>
         </form>
     </div>
-    <div class="h-screen w-1/2 bg-darkmode dark:bg-white">
-        <p class="text-white dark:text-black font-inter text-8xl font-bold p-4 drop-shadow-glow dark:drop-shadow-glow">New here?</p>
-        <p class="text-white dark:text-black text-lg p-4">If you are new here, just create a new Account! <a href="/register" class="text-rose-300">Register</a></p>
+    <div class="h-screen w-1/2 bg-white dark:bg-darkmode">
+        <p class="text-black dark:text-white font-inter text-5xl font-bold p-4 drop-shadow-glow dark:drop-shadow-glow">New here?</p>
+        <p class="text-black dark:text-white text-lg p-4">If you are new here, just create a new Account! <a href="/register" class="text-blue-500">Register</a></p>
     </div>
 </div>
 
