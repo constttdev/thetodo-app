@@ -5,7 +5,6 @@
     function submitForm(index: number) {
         if(form_update[index]) {
             form_update[index].submit();
-            console.log(form_update)
         }
     }
 </script>
@@ -23,6 +22,8 @@
             <input type="checkbox" checked={todo.status} name="checked" on:change={()=> {
                 submitForm(index);
             }}>
+            <p>id: {todo.id}</p>
+            <p>status: {todo.status}</p>
         </form>
     </div> 
 {/each}

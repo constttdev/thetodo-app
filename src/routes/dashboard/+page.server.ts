@@ -4,7 +4,6 @@ export const load = async({ locals }) => {
 	if (!locals.user) {
 		redirect(307, '/login');
 	}
-
 	const todos = await locals.pb.collection('todos').getFullList({
 		sort: '-created'
 	});
@@ -36,7 +35,12 @@ export const actions = {
 		const data = await request.formData();
 		const id = data.get("id");
 		const checked = data.get("checked")
-		console.log(`Id ${id}`)
-		console.log(`Checked ${checked}`)
+
+		const changeData = {
+			status: checked
+		}
+
+		// TODO: Fix the updating on pocketbase
+		await locals.pb.collection('todos').update(String(id),changeData);
 	}
 }
