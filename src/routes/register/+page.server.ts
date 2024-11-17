@@ -40,8 +40,6 @@ export const actions = {
 						reqdata.password.toString(),
 						reqdata.email.toString()
 					);
-
-				console.log(`Sucesfully Registerd user: ${username} with password: ${password}`);
 			} catch (error) {
 				if (error instanceof ClientResponseError) {
 					console.log(error);

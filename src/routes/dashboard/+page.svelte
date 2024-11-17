@@ -3,10 +3,23 @@
 	export let data;
 	let form_update: HTMLFormElement[] = [];
 	let form_remove: HTMLFormElement[] = [];
+
+	let loading: boolean;
 </script>
 
 <div class="w-screen justify-items-center">
-	<form action="/dashboard?/createTodo" method="POST" use:enhance class="mb-4">
+	<form
+		action="/dashboard?/createTodo"
+		method="POST"
+		use:enhance={() => {
+			loading = true;
+			return async ({ update }) => {
+				await update();
+				loading = false;
+			};
+		}}
+		class="mb-4"
+	>
 		<input
 			minlength="1"
 			class="w-96 rounded-lg border border-gray-500 bg-gray-100/5 p-1 text-left text-sm text-black dark:border-gray-600 dark:bg-gray-700"
@@ -15,7 +28,7 @@
 		/>
 		<button
 			class="h-7 w-7 rounded border border-gray-500 bg-gray-100 dark:border-gray-600 dark:bg-gray-700"
-			>+</button
+			>{loading ? '+..' : '+'}</button
 		>
 	</form>
 

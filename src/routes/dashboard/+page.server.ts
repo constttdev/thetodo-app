@@ -8,7 +8,6 @@ export const load = async ({ locals }) => {
 	const todos = await locals.pb.collection('todos').getFullList({
 		sort: '-created'
 	});
-	console.log('Load function!');
 
 	return { user: locals.user, todos: todos };
 };
